@@ -54,6 +54,7 @@ import net.imglib2.img.cell.CellImgFactory;
 import net.imglib2.img.list.ListImgFactory;
 import net.imglib2.type.NativeType;
 import net.imglib2.type.Type;
+import net.imglib2.type.operators.ValueEquals;
 
 /**
  * A collection of general-purpose utility methods for working with ImgLib2 data
@@ -977,5 +978,20 @@ public class Util
 		for ( int i = 0; i < a.length; ++i )
 			if ( b[ i ] > a[ i ] )
 				a[ i ] = b[ i ];
+	}
+
+	/**
+	 * This method should be used in implementations of {@link ValueEquals},
+	 * to override {@link Object#equals(Object)}.
+	 *
+	 * @see net.imglib2.type.AbstractNativeType#equals(Object)
+	 */
+	public static <T extends ValueEquals<S>, S extends T> boolean valueEqualsObject( T a, Object b )
+	{
+		if( ! a.getClass().isInstance( b ) )
+			return false;
+		@SuppressWarnings( "unchecked" )
+		S s = ( S ) b;
+		return a.valueEquals( s );
 	}
 }
