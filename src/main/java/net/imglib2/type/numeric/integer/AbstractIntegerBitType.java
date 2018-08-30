@@ -97,26 +97,6 @@ public abstract class AbstractIntegerBitType< T extends AbstractIntegerBitType< 
 	public void setOne() { setInteger( 1 ); }
 
 	@Override
-	public boolean equals( final Object obj ) {
-		if ( !getClass().isInstance( obj ) )
-			return false;
-		@SuppressWarnings("unchecked")
-		final T t = (T) obj;
-		return AbstractIntegerBitType.this.valueEquals( t );
-	}
-
-	@Override
-	public int hashCode() {
-		return Long.hashCode( get() );
-	}
-
-	@Override
-	public int compareTo( final T other )
-	{
-		return Long.compare( getIntegerLong(), other.getIntegerLong() );
-	}
-
-	@Override
 	public String toString() { return "" + getIntegerLong(); }
 
 	@Override
@@ -192,6 +172,12 @@ public abstract class AbstractIntegerBitType< T extends AbstractIntegerBitType< 
 	@Override
 	public void complexConjugate(){}
 
+	@Override
+	public int compareTo( final T other )
+	{
+		return Long.compare( getIntegerLong(), other.getIntegerLong() );
+	}
+
 	/**
 	 * Default test at long precision.  Please override for types longer than 64bit.
 	 *
@@ -202,5 +188,19 @@ public abstract class AbstractIntegerBitType< T extends AbstractIntegerBitType< 
 	public boolean valueEquals( final T t )
 	{
 		return get() == t.get();
+	}
+
+	@Override
+	public boolean equals( final Object obj ) {
+		if ( !getClass().isInstance( obj ) )
+			return false;
+		@SuppressWarnings("unchecked")
+		final T t = (T) obj;
+		return AbstractIntegerBitType.this.valueEquals( t );
+	}
+
+	@Override
+	public int hashCode() {
+		return Long.hashCode( get() );
 	}
 }

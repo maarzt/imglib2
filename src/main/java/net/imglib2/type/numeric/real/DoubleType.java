@@ -214,4 +214,8 @@ public class DoubleType extends AbstractRealType< DoubleType > implements Native
 	{
 		return 64;
 	}
+
+	public static boolean equals(double a, double b) {
+		return Double.doubleToLongBits( a ) == Double.doubleToLongBits( b );
+	}
 }

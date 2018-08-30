@@ -260,7 +260,7 @@ public abstract class GenericByteType< T extends GenericByteType< T > > extends 
 	@Override
 	public int compareTo( final T other )
 	{
-		// NB: Use Integer.compare because Byte.compare returns value different from -1, 0, 1.
+		// NB: Use Integer.compare because Byte.compare returns values different from -1, 0, 1.
 		return Integer.compare( getByte(), other.getByte() );
 	}
 
@@ -273,7 +273,7 @@ public abstract class GenericByteType< T extends GenericByteType< T > > extends 
 	@Override
 	public boolean equals( final Object obj )
 	{
-		if( ! getClass().isInstance( obj ) )
+		if ( ! getClass().isInstance( obj ) )
 			return false;
 		@SuppressWarnings( "unchecked" )
 		T t = ( T ) obj;

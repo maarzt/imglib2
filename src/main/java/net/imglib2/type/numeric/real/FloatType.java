@@ -293,7 +293,7 @@ public class FloatType extends AbstractRealType< FloatType > implements NativeTy
 	@Override
 	public boolean valueEquals( final FloatType other )
 	{
-		return get() == other.get();
+		return FloatType.equals( get(), other.get() );
 	}
 
 	@Override
@@ -306,5 +306,10 @@ public class FloatType extends AbstractRealType< FloatType > implements NativeTy
 	public int hashCode()
 	{
 		return Float.hashCode( get() );
+	}
+
+	public static boolean equals( float a, float b )
+	{
+		return Float.floatToIntBits( a ) == Float.floatToIntBits( b );
 	}
 }

@@ -39,10 +39,9 @@ import net.imglib2.img.basictypeaccess.FloatAccess;
 import net.imglib2.img.basictypeaccess.array.FloatArray;
 import net.imglib2.type.NativeType;
 import net.imglib2.type.NativeTypeFactory;
+import net.imglib2.type.numeric.real.FloatType;
 import net.imglib2.util.Fraction;
 import net.imglib2.util.Util;
-
-import static java.lang.Float.floatToIntBits;
 
 /**
  * TODO
@@ -294,8 +293,8 @@ public class ComplexFloatType extends AbstractComplexType< ComplexFloatType > im
 	@Override
 	public boolean valueEquals( final ComplexFloatType t )
 	{
-		return getRealFloat() == t.getRealFloat() &&
-				getImaginaryFloat() == t.getImaginaryFloat();
+		return FloatType.equals( getRealFloat(), t.getRealFloat() ) &&
+				FloatType.equals( getImaginaryFloat(), t.getImaginaryFloat() );
 	}
 
 	@Override
@@ -307,8 +306,8 @@ public class ComplexFloatType extends AbstractComplexType< ComplexFloatType > im
 	@Override
 	public int hashCode()
 	{
-		final int hash1 = Float.hashCode( getRealFloat() );
-		final int hash2 = Float.hashCode( getImaginaryFloat() );
-		return Util.combineHash( hash1, hash2 );
+		final int rHash = Float.hashCode( getRealFloat() );
+		final int iHash = Float.hashCode( getImaginaryFloat() );
+		return Util.combineHash( rHash, iHash );
 	}
 }

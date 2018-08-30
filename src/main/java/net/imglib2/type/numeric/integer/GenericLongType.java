@@ -264,7 +264,7 @@ public abstract class GenericLongType< T extends GenericLongType< T > > extends 
 	@Override
 	public boolean equals( final Object obj )
 	{
-		if( ! getClass().isInstance( obj ) )
+		if ( ! getClass().isInstance( obj ) )
 			return false;
 		@SuppressWarnings( "unchecked" )
 		T t = ( T ) obj;

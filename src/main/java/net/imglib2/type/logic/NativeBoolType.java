@@ -44,6 +44,7 @@ import net.imglib2.type.NativeType;
 import net.imglib2.type.NativeTypeFactory;
 import net.imglib2.type.numeric.integer.AbstractIntegerType;
 import net.imglib2.util.Fraction;
+import net.imglib2.util.Util;
 
 /**
  * {@link NativeType} backed by {@code boolean}.
@@ -268,9 +269,14 @@ public class NativeBoolType extends AbstractIntegerType< NativeBoolType > implem
 	}
 
 	@Override
+	public boolean equals( Object obj )
+	{
+		return Util.valueEqualsObject( this, obj );
+	}
+
+	@Override
 	public int hashCode()
 	{
-		// NB: Use the same hash code as java.lang.Boolean#hashCode().
 		return Boolean.hashCode( get() );
 	}
 
@@ -339,5 +345,4 @@ public class NativeBoolType extends AbstractIntegerType< NativeBoolType > implem
 	{
 		set( b.compareTo( BigInteger.ZERO ) > 0 );
 	}
-
 }

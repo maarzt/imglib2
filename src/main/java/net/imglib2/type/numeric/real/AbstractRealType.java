@@ -138,7 +138,7 @@ public abstract class AbstractRealType< T extends AbstractRealType< T >> extends
 	@Override
 	public boolean valueEquals( T other )
 	{
-		return getRealDouble() == other.getRealDouble();
+		return DoubleType.equals( getRealDouble(), other.getRealDouble() );
 	}
 
 	@Override

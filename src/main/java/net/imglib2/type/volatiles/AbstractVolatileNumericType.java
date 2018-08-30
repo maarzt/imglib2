@@ -125,13 +125,13 @@ abstract public class AbstractVolatileNumericType< N extends NumericType< N >, T
 	@Override
 	public boolean valueEquals( T other )
 	{
-		return (isValid() == other.isValid()) && t.valueEquals( other.t );
+		return isValid() == other.isValid() && t.valueEquals( other.t );
 	}
 
 	@Override
 	public boolean equals( final Object obj )
 	{
-		if( ! getClass().isInstance( obj ) )
+		if ( ! getClass().isInstance( obj ) )
 			return false;
 		@SuppressWarnings( "unchecked" )
 		T t = ( T ) obj;
