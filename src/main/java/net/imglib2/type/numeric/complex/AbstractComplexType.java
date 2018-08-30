@@ -190,9 +190,9 @@ public abstract class AbstractComplexType< T extends AbstractComplexType< T >> i
 	@Override
 	public int hashCode()
 	{
-		final int iHash = Double.hashCode( getRealDouble() );
-		final int rHash = Double.hashCode( getImaginaryDouble() );
-		return Util.combineHash( iHash, rHash );
+		final int rHash = Double.hashCode( getRealDouble() );
+		final int iHash = Double.hashCode( getImaginaryDouble() );
+		return Util.combineHash( rHash, iHash );
 	}
 
 	@Override
