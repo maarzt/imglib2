@@ -41,8 +41,6 @@ import net.imglib2.type.NativeType;
 import net.imglib2.type.NativeTypeFactory;
 import net.imglib2.util.Fraction;
 
-import static java.lang.Double.doubleToLongBits;
-
 /**
  * TODO
  *

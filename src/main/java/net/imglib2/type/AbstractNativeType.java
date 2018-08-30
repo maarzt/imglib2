@@ -34,8 +34,6 @@
 
 package net.imglib2.type;
 
-import net.imglib2.util.Util;
-
 /**
  * TODO
  * 
