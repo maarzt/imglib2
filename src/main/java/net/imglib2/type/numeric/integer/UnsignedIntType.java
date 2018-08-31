@@ -250,22 +250,4 @@ public class UnsignedIntType extends GenericIntType< UnsignedIntType >
 	{
 		return Long.compare( get(), other.get() );
 	}
-
-	@Override
-	public boolean valueEquals( UnsignedIntType other )
-	{
-		return getInt() == other.getInt();
-	}
-
-	@Override
-	public boolean equals( final Object obj )
-	{
-		return Util.valueEqualsObject( this, obj );
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return Integer.hashCode( getInt() );
-	}
 }
