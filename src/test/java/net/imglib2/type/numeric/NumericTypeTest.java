@@ -296,8 +296,8 @@ public class NumericTypeTest< T extends NumericType< T > >
 		final Comparable zero = newNumber.apply( 0 );
 		final Comparable two = newNumber.apply( 2 );
 		final Comparable anatherTwo = newNumber.apply( 2 );
-		assertEquals( -1, zero.compareTo( two ) );
-		assertEquals( 1, two.compareTo( zero ) );
+		assertTrue( zero.compareTo( two ) < 0 );
+		assertTrue( two.compareTo( zero ) > 0);
 		assertEquals( 0, two.compareTo( anatherTwo ) );
 	}
 
