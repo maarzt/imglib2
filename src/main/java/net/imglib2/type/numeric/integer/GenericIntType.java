@@ -272,10 +272,10 @@ public abstract class GenericIntType< T extends GenericIntType< T > > extends Ab
 	@Override
 	public boolean equals( final Object obj )
 	{
-		if ( ! getClass().isInstance( obj ) )
+		if ( !getClass().isInstance( obj ) )
 			return false;
 		@SuppressWarnings( "unchecked" )
-		T t = ( T ) obj;
+		final T t = ( T ) obj;
 		return GenericIntType.this.valueEquals( t );
 	}
 

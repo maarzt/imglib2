@@ -273,10 +273,10 @@ public abstract class GenericByteType< T extends GenericByteType< T > > extends 
 	@Override
 	public boolean equals( final Object obj )
 	{
-		if ( ! getClass().isInstance( obj ) )
+		if ( !getClass().isInstance( obj ) )
 			return false;
 		@SuppressWarnings( "unchecked" )
-		T t = ( T ) obj;
+		final T t = ( T ) obj;
 		return GenericByteType.this.valueEquals( t );
 	}
 

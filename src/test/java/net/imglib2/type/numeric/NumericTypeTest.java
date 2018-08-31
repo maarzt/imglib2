@@ -87,8 +87,10 @@ import static org.junit.Assume.assumeTrue;
 /**
  * Test basic functionality of every NumericType implementation.
  * <p>
- * It's a parameterized test, see <a href="https://github.com/junit-team/junit4/wiki/parameterized-tests">Junit4 Parameterized Test</a>.
- * The test is executed for every type in the list {@link NumericTypeTest#numericTypes}.
+ * It's a parameterized test, see <a href=
+ * "https://github.com/junit-team/junit4/wiki/parameterized-tests">Junit4
+ * Parameterized Test</a>. The test is executed for every type in the list
+ * {@link NumericTypeTest#numericTypes}.
  *
  * @param <T>
  */
@@ -144,7 +146,7 @@ public class NumericTypeTest< T extends NumericType< T > >
 		).collect( Collectors.toList() );
 	}
 
-	public NumericTypeTest( String className, T type )
+	public NumericTypeTest( final String className, final T type )
 	{
 		this.type = type;
 	}
@@ -152,36 +154,36 @@ public class NumericTypeTest< T extends NumericType< T > >
 	@Test
 	public void testValueEquals()
 	{
-		boolean result = newOne().valueEquals( newOne() );
+		final boolean result = newOne().valueEquals( newOne() );
 		assumeTrue( result );
 	}
 
 	@Test
 	public void testNotValueEquals()
 	{
-		boolean result = newZero().valueEquals( newOne() );
+		final boolean result = newZero().valueEquals( newOne() );
 		assumeFalse( result );
 	}
 
 	@Test
 	public void testEquals()
 	{
-		boolean result = newOne().equals( newOne() );
+		final boolean result = newOne().equals( newOne() );
 		assertTrue( result );
 	}
 
 	@Test
 	public void testNotEqual()
 	{
-		boolean result = newOne().equals( newZero() );
+		final boolean result = newOne().equals( newZero() );
 		assertFalse( result );
 	}
 
 	@Test
 	public void testSet()
 	{
-		T a = newZero();
-		T b = newOne();
+		final T a = newZero();
+		final T b = newOne();
 		a.set( b );
 		assertEquals( b, a );
 	}
@@ -189,7 +191,7 @@ public class NumericTypeTest< T extends NumericType< T > >
 	@Test
 	public void testOneMinusOne()
 	{
-		T value = newOne();
+		final T value = newOne();
 		value.sub( newOne() );
 		assertEquals( newZero(), value );
 	}
@@ -200,7 +202,7 @@ public class NumericTypeTest< T extends NumericType< T > >
 		if ( isMaxValueLessThanSix() )
 			return;
 
-		T value = newNumber( 3 );
+		final T value = newNumber( 3 );
 		value.add( newNumber( 2 ) );
 		assertEquals( newNumber( 5 ), value );
 	}
@@ -211,7 +213,7 @@ public class NumericTypeTest< T extends NumericType< T > >
 		if ( isMaxValueLessThanSix() )
 			return;
 
-		T value = newNumber( 5 );
+		final T value = newNumber( 5 );
 		value.sub( newNumber( 3 ) );
 		assertEquals( newNumber( 2 ), value );
 	}
@@ -221,7 +223,7 @@ public class NumericTypeTest< T extends NumericType< T > >
 	{
 		if ( isMaxValueLessThanSix() )
 			return;
-		T value = newNumber( 3 );
+		final T value = newNumber( 3 );
 		value.mul( newNumber( 2 ) );
 		assertEquals( newNumber( 6 ), value );
 	}
@@ -231,7 +233,7 @@ public class NumericTypeTest< T extends NumericType< T > >
 	{
 		if ( isMaxValueLessThanSix() )
 			return;
-		T value = newNumber( 3 );
+		final T value = newNumber( 3 );
 		value.mul( 2.0 );
 		assertEquals( newNumber( 6 ), value );
 	}
@@ -242,7 +244,7 @@ public class NumericTypeTest< T extends NumericType< T > >
 		if ( isMaxValueLessThanSix() )
 			return;
 
-		T value = newNumber( 3 );
+		final T value = newNumber( 3 );
 		value.mul( 2.0f );
 		assertEquals( newNumber( 6 ), value );
 	}
@@ -252,7 +254,7 @@ public class NumericTypeTest< T extends NumericType< T > >
 	{
 		if ( isMaxValueLessThanSix() )
 			return;
-		T value = newNumber( 6 );
+		final T value = newNumber( 6 );
 		value.div( newNumber( 2 ) );
 		assertEquals( newNumber( 3 ), value );
 	}
@@ -260,33 +262,34 @@ public class NumericTypeTest< T extends NumericType< T > >
 	@Test
 	public void testHashCodeEquals()
 	{
-		int hashA = newOne().hashCode();
-		int hashB = newOne().hashCode();
-		assertEquals(hashA, hashB);
+		final int hashA = newOne().hashCode();
+		final int hashB = newOne().hashCode();
+		assertEquals( hashA, hashB );
 	}
 
 	@Test
 	public void testHashCodeChanges()
 	{
-		T variable = newZero();
-		int hashZero = variable.hashCode();
+		final T variable = newZero();
+		final int hashZero = variable.hashCode();
 		variable.set( newOne() );
-		int hashOne = variable.hashCode();
-		assertNotEquals(hashZero, hashOne);
+		final int hashOne = variable.hashCode();
+		assertNotEquals( hashZero, hashOne );
 	}
 
 	@Test
-	public void testCompareTo() {
+	public void testCompareTo()
+	{
 		final T t = newZero();
-		if( ( t instanceof Comparable ) && !( t instanceof BooleanType ) )
-			testCompareTo( value -> (Comparable) newNumber( value ) );
+		if ( ( t instanceof Comparable ) && !( t instanceof BooleanType ) )
+			testCompareTo( value -> ( Comparable ) newNumber( value ) );
 	}
 
-	private static void testCompareTo( IntFunction< Comparable > newNumber )
+	private static void testCompareTo( final IntFunction< Comparable > newNumber )
 	{
-		Comparable zero = newNumber.apply( 0 );
-		Comparable two = newNumber.apply( 2 );
-		Comparable anatherTwo = newNumber.apply( 2 );
+		final Comparable zero = newNumber.apply( 0 );
+		final Comparable two = newNumber.apply( 2 );
+		final Comparable anatherTwo = newNumber.apply( 2 );
 		assertEquals( -1, zero.compareTo( two ) );
 		assertEquals( 1, two.compareTo( zero ) );
 		assertEquals( 0, two.compareTo( anatherTwo ) );
@@ -296,14 +299,14 @@ public class NumericTypeTest< T extends NumericType< T > >
 
 	private T newZero()
 	{
-		T zero = type.createVariable();
+		final T zero = type.createVariable();
 		zero.setZero();
 		return zero;
 	}
 
 	private T newOne()
 	{
-		T one = type.createVariable();
+		final T one = type.createVariable();
 		one.setOne();
 		return one;
 	}
@@ -314,12 +317,12 @@ public class NumericTypeTest< T extends NumericType< T > >
 				|| type instanceof Unsigned2BitType;
 	}
 
-	private T newNumber( int value )
+	private T newNumber( final int value )
 	{
 		if ( value < 0 )
 			throw new AssertionError();
-		T result = newZero();
-		T one = newOne();
+		final T result = newZero();
+		final T one = newOne();
 		for ( int i = 0; i < value; i++ )
 			result.add( one );
 		return result;

@@ -111,7 +111,7 @@ public abstract class AbstractIntegerType< T extends AbstractIntegerType< T > > 
 	}
 
 	@Override
-	public boolean valueEquals( T other )
+	public boolean valueEquals( final T other )
 	{
 		return getIntegerLong() == getIntegerLong();
 	}
@@ -121,7 +121,7 @@ public abstract class AbstractIntegerType< T extends AbstractIntegerType< T > > 
 	{
 		if ( !getClass().isInstance( obj ) )
 			return false;
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings( "unchecked" )
 		final T t = ( T ) obj;
 		return AbstractIntegerType.this.valueEquals( t );
 	}
@@ -131,5 +131,4 @@ public abstract class AbstractIntegerType< T extends AbstractIntegerType< T > > 
 	{
 		return Long.hashCode( getIntegerLong() );
 	}
-
 }

@@ -191,16 +191,18 @@ public abstract class AbstractIntegerBitType< T extends AbstractIntegerBitType< 
 	}
 
 	@Override
-	public boolean equals( final Object obj ) {
+	public boolean equals( final Object obj )
+	{
 		if ( !getClass().isInstance( obj ) )
 			return false;
-		@SuppressWarnings("unchecked")
-		final T t = (T) obj;
+		@SuppressWarnings( "unchecked" )
+		final T t = ( T ) obj;
 		return AbstractIntegerBitType.this.valueEquals( t );
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		return Long.hashCode( get() );
 	}
 }

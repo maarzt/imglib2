@@ -201,7 +201,8 @@ public abstract class GenericShortType< T extends GenericShortType< T > >
 
 	@Override
 	public void inc()
-	{ short a = getShort();
+	{
+		short a = getShort();
 		setShort( ++a );
 	}
 
