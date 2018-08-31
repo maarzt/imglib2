@@ -11,7 +11,7 @@
  * %%
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice,
  *    this list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
@@ -346,23 +346,5 @@ public class UnsignedLongType extends GenericLongType< UnsignedLongType >
 	public int compareTo( final UnsignedLongType other )
 	{
 		return compare( get(), other.get() );
-	}
-
-	@Override
-	public boolean valueEquals( UnsignedLongType other )
-	{
-		return getLong() == other.getLong();
-	}
-
-	@Override
-	public boolean equals( final Object obj )
-	{
-		return Util.valueEqualsObject( this, obj );
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return Long.hashCode( getLong() );
 	}
 }
