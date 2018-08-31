@@ -428,19 +428,15 @@ public class Unsigned128BitType extends AbstractIntegerType< Unsigned128BitType 
 	@Override
 	public int compareTo( final Unsigned128BitType t )
 	{
-		final long upper1 = dataAccess.getValue( i * 2 + 1 ),
-				upper2 = t.dataAccess.getValue( t.i * 2 + 1 );
-		if ( -1 == Long.compareUnsigned( upper1, upper2 ) )
-		{
-			return -1;
-		}
-		else if ( upper1 == upper2 )
-		{
-			final long lower1 = dataAccess.getValue( i * 2 ),
-					lower2 = t.dataAccess.getValue( t.i * 2 );
-			return Long.compareUnsigned( lower1, lower2 );
-		}
-		return 1;
+		final long upper1 = dataAccess.getValue( i * 2 + 1 );
+		final long upper2 = t.dataAccess.getValue( t.i * 2 + 1 );
+		final int compareUpper = Long.compareUnsigned( upper1, upper2 );
+		if ( compareUpper != 0 )
+			return compareUpper;
+
+		final long lower1 = dataAccess.getValue( i * 2 );
+		final long lower2 = t.dataAccess.getValue( t.i * 2 );
+		return Long.compareUnsigned( lower1, lower2 );
 	}
 
 	@Override
