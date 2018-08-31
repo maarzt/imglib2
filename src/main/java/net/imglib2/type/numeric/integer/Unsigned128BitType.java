@@ -430,7 +430,7 @@ public class Unsigned128BitType extends AbstractIntegerType< Unsigned128BitType 
 	{
 		final long upper1 = dataAccess.getValue( i * 2 + 1 ),
 				upper2 = t.dataAccess.getValue( t.i * 2 + 1 );
-		if ( -1 == UnsignedLongType.compare( upper1, upper2 ) )
+		if ( -1 == Long.compareUnsigned( upper1, upper2 ) )
 		{
 			return -1;
 		}
@@ -438,7 +438,7 @@ public class Unsigned128BitType extends AbstractIntegerType< Unsigned128BitType 
 		{
 			final long lower1 = dataAccess.getValue( i * 2 ),
 					lower2 = t.dataAccess.getValue( t.i * 2 );
-			return UnsignedLongType.compare( lower1, lower2 );
+			return Long.compareUnsigned( lower1, lower2 );
 		}
 		return 1;
 	}

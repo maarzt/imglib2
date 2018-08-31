@@ -340,11 +340,10 @@ public class UnsignedVariableBitLengthType extends AbstractBit64Type< UnsignedVa
 	public void complexConjugate()
 	{}
 
-	/** @see UnsignedLongType#compare(long, long) */
 	@Override
 	public int compareTo( final UnsignedVariableBitLengthType t )
 	{
-		return UnsignedLongType.compare( getBits(), t.getBits() );
+		return Long.compareUnsigned( getBits(), t.getBits() );
 	}
 
 	/**

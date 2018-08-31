@@ -143,7 +143,7 @@ public class UnsignedLongType extends GenericLongType< UnsignedLongType >
 		if ( d2 < 0 )
 		{
 			// d2 is larger than the maximum signed long value
-			if ( -1 == compare( d1, d2 ) )
+			if ( Long.compareUnsigned( d1, d2 ) < 0 )
 			{
 				// d1 is smaller than d2
 				return 0;
@@ -160,7 +160,7 @@ public class UnsignedLongType extends GenericLongType< UnsignedLongType >
 			// Approximate division: exact or one less than the actual value
 			final long quotient = ( ( d1 >>> 1 ) / d2 ) << 1;
 			final long reminder = d1 - quotient * d2;
-			return quotient + ( -1 == compare( d2, reminder ) ? 0 : 1 );
+			return quotient + ( Long.compareUnsigned( d2, reminder ) < 0 ? 0 : 1 );
 		}
 
 		// Exact division, given that both d1 and d2 are smaller than
@@ -296,11 +296,9 @@ public class UnsignedLongType extends GenericLongType< UnsignedLongType >
 	}
 
 	/**
-	 *
-	 * @param a
-	 * @param b
-	 * @return -1 if {@code a < b}, 0 if {@code a == b}, 1 if {@code a > b}.
+	 * @deprecated Use {@link Long#compareUnsigned(long, long)} instead.
 	 */
+	@Deprecated
 	static public final int compare( final long a, final long b )
 	{
 		if ( a == b )
@@ -345,6 +343,6 @@ public class UnsignedLongType extends GenericLongType< UnsignedLongType >
 	@Override
 	public int compareTo( final UnsignedLongType other )
 	{
-		return compare( get(), other.get() );
+		return Long.compareUnsigned( get(), other.get() );
 	}
 }
