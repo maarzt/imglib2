@@ -267,6 +267,12 @@ public class NumericTypeTest< T extends NumericType< T > >
 		assertEquals( hashA, hashB );
 	}
 
+	/*
+	 * NB: This test is here as a sanity check. In principle, there may be hash
+	 * collision between 0 and 1 values. In practice, for the current
+	 * implementations there never is. (If there is ever a good reason to change
+	 * that, this test can be removed.)
+	 */
 	@Test
 	public void testHashCodeChanges()
 	{
