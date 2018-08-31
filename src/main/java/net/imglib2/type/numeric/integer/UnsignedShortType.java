@@ -236,22 +236,4 @@ public class UnsignedShortType extends GenericShortType< UnsignedShortType >
 	{
 		return Integer.compare( get(), other.get() );
 	}
-
-	@Override
-	public boolean valueEquals( UnsignedShortType other )
-	{
-		return getShort() == other.getShort();
-	}
-
-	@Override
-	public boolean equals( final Object obj )
-	{
-		return Util.valueEqualsObject( this, obj );
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return Integer.hashCode( get() );
-	}
 }
