@@ -5,6 +5,8 @@ import net.imglib2.DefaultInterval;
 import net.imglib2.FinalInterval;
 import net.imglib2.Interval;
 import net.imglib2.Point;
+import net.imglib2.RealLocalizable;
+import net.imglib2.RealPoint;
 import net.imglib2.img.array.ArrayImgs;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
 import net.imglib2.util.Intervals;
@@ -119,6 +121,16 @@ public class DefaultIntervalBenchmark
 			for(Interval b: manyIntervals)
 				if( Intervals.contains( a, b ) )
 					sum++;
+		bh.consume( sum );
+	}
+
+	@Benchmark
+	public void intervalContainsRealPoints( Blackhole bh ) {
+		long sum = 0;
+		RealLocalizable r = new RealPoint(17.0, 6.0, 42.0);
+		for(Interval a : manyIntervals)
+			if( Intervals.contains( a, r ))
+				sum++;
 		bh.consume( sum );
 	}
 
