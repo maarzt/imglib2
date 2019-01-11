@@ -1,10 +1,10 @@
 package net.imglib2.interval;
 
+import net.imglib2.AbstractInterval;
 import net.imglib2.DefaultInterval;
 import net.imglib2.FinalInterval;
 import net.imglib2.Interval;
 import net.imglib2.Point;
-import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.array.ArrayImgs;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
 import net.imglib2.util.Intervals;
@@ -35,6 +35,32 @@ public class DefaultIntervalBenchmark
 	long[][] positions = new long[100][3];
 	double[][] realPositions = new double[100][3];
 
+	Interval a = new IntervalA();
+	Interval b = new IntervalB();
+	Interval c = new IntervalC();
+
+	DefaultInterval defaultA = new DefaultIntervalA();
+	DefaultInterval defaultB = new DefaultIntervalB();
+	DefaultInterval defaultC = new DefaultIntervalC();
+
+	@Benchmark
+	public void abc() {
+		for ( double[] position : realPositions ) {
+			a.realMin( position );
+			b.realMin( position );
+			c.realMin( position );
+		}
+	}
+
+	@Benchmark
+	public void abcDefault() {
+		for ( double[] position : realPositions ) {
+			defaultA.realMin( position );
+			defaultB.realMin( position );
+			defaultC.realMin( position );
+		}
+	}
+
 	@Benchmark
 	public void benchmarkMin() {
 		for ( long[] position : positions )
@@ -59,6 +85,7 @@ public class DefaultIntervalBenchmark
 			defaultInterval.realMin( position );
 	}
 
+
 	IntervalView<UnsignedByteType> image = Views.interval( Views.extendBorder( ArrayImgs.unsignedBytes( new byte[]{ 1, 2, 3, 4 }, 2, 2) ), Intervals.createMinMax( -100, -100, 100, 100 ) );
 
 	@Benchmark
@@ -75,12 +102,138 @@ public class DefaultIntervalBenchmark
 	{
 		final Options opt = new OptionsBuilder()
 				.include( DefaultIntervalBenchmark.class.getSimpleName() )
-				.forks( 0 )
+				.forks( 1 )
 				.warmupIterations( 4 )
 				.measurementIterations( 8 )
 				.warmupTime( TimeValue.milliseconds( 100 ) )
 				.measurementTime( TimeValue.milliseconds( 100 ) )
 				.build();
 		new Runner( opt ).run();
+	}
+
+	private static class DefaultIntervalA implements DefaultInterval {
+
+		@Override
+		public long min( int d )
+		{
+			return - d - 10;
+		}
+
+		@Override
+		public long max( int d )
+		{
+			return + d;
+		}
+
+		@Override
+		public int numDimensions()
+		{
+			return 3;
+		}
+	}
+
+	long[] bmin = {2, 2, 2};
+	long[] bmax = {24, 25, 89};
+
+	private class DefaultIntervalB implements DefaultInterval {
+
+		@Override
+		public long min( int d )
+		{
+			return bmin[d];
+		}
+
+		@Override
+		public long max( int d )
+		{
+			return bmax[d];
+		}
+
+		@Override
+		public int numDimensions()
+		{
+			return 3;
+		}
+	}
+
+	private class DefaultIntervalC implements DefaultInterval {
+
+		@Override
+		public long min( int d )
+		{
+			return - bmin[d];
+		}
+
+		@Override
+		public long max( int d )
+		{
+			return bmax[d] + d;
+		}
+
+		@Override
+		public int numDimensions()
+		{
+			return 3;
+		}
+	}
+
+	private static class IntervalA extends AbstractInterval
+	{
+
+		public IntervalA()
+		{
+			super( 3 );
+		}
+
+		@Override
+		public long min( int d )
+		{
+			return - d - 10;
+		}
+
+		@Override
+		public long max( int d )
+		{
+			return + d;
+		}
+	}
+
+	private class IntervalB extends AbstractInterval {
+
+		public IntervalB()
+		{
+			super( 3 );
+		}
+
+		@Override
+		public long min( int d )
+		{
+			return bmin[d];
+		}
+
+		@Override
+		public long max( int d )
+		{
+			return bmax[d];
+		}
+	}
+
+	private class IntervalC extends AbstractInterval {
+
+		public IntervalC() {
+			super( 3 );
+		}
+
+		@Override
+		public long min( int d )
+		{
+			return - bmin[d];
+		}
+
+		@Override
+		public long max( int d )
+		{
+			return bmax[d] + d;
+		}
 	}
 }
