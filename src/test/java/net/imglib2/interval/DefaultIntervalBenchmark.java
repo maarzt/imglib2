@@ -20,6 +20,9 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
 
+import java.util.Collections;
+import java.util.List;
+
 @State( Scope.Benchmark )
 public class DefaultIntervalBenchmark
 {
@@ -83,6 +86,15 @@ public class DefaultIntervalBenchmark
 	public void benchmarkRealMinDefault() {
 		for ( double[] position : realPositions )
 			defaultInterval.realMin( position );
+	}
+
+	@Benchmark
+	public void splitIntervall() {
+		List<Interval> intervals = Collections.singletonList(new FinalInterval( 1024, 1024, 1024 ));
+		for ( int i = 0; i < 10; i++ )
+		{
+			intervals = SplitInterval.split( intervals );
+		}
 	}
 
 
