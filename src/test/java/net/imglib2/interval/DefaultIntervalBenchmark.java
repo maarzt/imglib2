@@ -20,6 +20,7 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -95,6 +96,30 @@ public class DefaultIntervalBenchmark
 		{
 			intervals = SplitInterval.split( intervals );
 		}
+	}
+
+	List<Interval> manyIntervals = initManyIntervals();
+
+	private List<Interval> initManyIntervals()
+	{
+		List<Interval> result = new ArrayList<>();
+		List<Interval> intervals = Collections.singletonList(new FinalInterval( 1024, 1024, 1024 ));
+		for ( int i = 0; i < 5; i++ )
+		{
+			intervals = SplitInterval.split( intervals );
+			result.addAll( intervals );
+		}
+		return result;
+	}
+
+	@Benchmark
+	public void intervalContains( Blackhole bh ) {
+		long sum = 0;
+		for(Interval a : manyIntervals)
+			for(Interval b: manyIntervals)
+				if( Intervals.contains( a, b ) )
+					sum++;
+		bh.consume( sum );
 	}
 
 
